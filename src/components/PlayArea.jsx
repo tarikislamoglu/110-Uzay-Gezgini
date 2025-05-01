@@ -1,23 +1,27 @@
-import { useState, useEffect } from 'react'
-import useSound from 'use-sound'
-import getSpaceShips from '../utilities/getSpaceShips'
-import shootShip from '../utilities/shootShip'
-
+import { useState, useEffect } from "react";
+import getSpaceShips from "../utilities/getSpaceShips";
+import shootShip from "../utilities/shootShip";
 export default function PlayArea({ playProps }) {
-  const { timeLeft, timerRunning, setScore } = playProps
-  const [currentShips, setCurrentShips] = useState([])
-  const [playLaser] = useSound('../audio/laser.mp3', { volume: 0.15 })
-  const [playExplosion] = useSound('../audio/explosion.mp3', { volume: 0.025 })
+  const {
+    timeLeft,
+    gameStarted,
+    setScore,
+    timerRunning,
+    playLaser,
+    playExplosion,
+    difficulty,
+  } = playProps;
+  const [currentShips, setCurrentShips] = useState([]);
 
   useEffect(() => {
-    if (timeLeft % 6 === 0 && timeLeft !== 0 && timerRunning) {
-      setCurrentShips(getSpaceShips)
+    if (timeLeft % 6 === 0 && timeLeft !== 0 && gameStarted && timerRunning) {
+      setCurrentShips(() => getSpaceShips(difficulty));
     }
-  }, [timeLeft, timerRunning])
+  }, [timeLeft, gameStarted, timerRunning]);
 
   const shipElements = currentShips.map((ship) => (
     <div
-      className={`ship ${ship.isShot ? 'disappear' : ''} flyDown`}
+      className={`ship ${ship.isShot ? "disappear" : ""} flyDown`}
       style={{ gridArea: ship.position }}
       onClick={
         ship.isShot
@@ -33,13 +37,22 @@ export default function PlayArea({ playProps }) {
       }
       key={ship.id}
     >
-      {ship.isShot ? '💥' : <span className={ship.type}>{ship.icon}</span>}
+      {ship.isShot ? "💥" : <span className={ship.type}>{ship.icon}</span>}
     </div>
-  ))
+  ));
 
   return (
-    <div onMouseDown={playLaser} className='play-area-container'>
+    <div
+      onMouseDown={(e) => {
+        playLaser();
+
+        if (!e.target.closest(".ship")) {
+          setScore(0);
+        }
+      }}
+      className="play-area-container"
+    >
       {shipElements}
     </div>
-  )
+  );
 }
