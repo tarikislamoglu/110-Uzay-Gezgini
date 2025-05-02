@@ -118,7 +118,7 @@ export default function App() {
             <label htmlFor="">Sound </label>
             <div className="flex">
               <span className="">
-                {musicSound > 0 ? <AiOutlineSound /> : <IoVolumeMuteOutline />}
+                {gameSound > 0 ? <AiOutlineSound /> : <IoVolumeMuteOutline />}
               </span>
               <input
                 type="range"
