@@ -17,6 +17,8 @@ export default function App() {
 
   const [musicSound, setMusicSound] = useState(50);
   const [gameSound, setGameSound] = useState(50);
+  const [lastGameSound, setLastGameSound] = useState(0.5);
+  const [lastMusicSound, setLastMusicSound] = useState(0.5);
 
   const [playSong] = useSound("../audio/song.mp3", {
     volume: musicSound / 100,
@@ -102,7 +104,17 @@ export default function App() {
           <div className="flex flex-col items-center">
             <label htmlFor="">Music </label>
             <div className="flex">
-              <span className="">
+              <span
+                className="cursor-pointer"
+                onClick={() => {
+                  if (musicSound > 0) {
+                    setLastMusicSound(musicSound);
+                    setMusicSound(0);
+                  } else {
+                    setMusicSound(lastMusicSound);
+                  }
+                }}
+              >
                 {musicSound > 0 ? <AiOutlineSound /> : <IoVolumeMuteOutline />}
               </span>
               <input
@@ -117,7 +129,17 @@ export default function App() {
           <div className="flex flex-col items-center">
             <label htmlFor="">Sound </label>
             <div className="flex">
-              <span className="">
+              <span
+                className="cursor-pointer"
+                onClick={() => {
+                  if (gameSound > 0) {
+                    setLastGameSound(gameSound);
+                    setGameSound(0);
+                  } else {
+                    setGameSound(lastGameSound);
+                  }
+                }}
+              >
                 {gameSound > 0 ? <AiOutlineSound /> : <IoVolumeMuteOutline />}
               </span>
               <input
