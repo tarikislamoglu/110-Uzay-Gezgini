@@ -10,6 +10,7 @@ export default function PlayArea({ playProps }) {
     playLaser,
     playExplosion,
     difficulty,
+    score,
   } = playProps;
   const [currentShips, setCurrentShips] = useState([]);
 
@@ -47,7 +48,9 @@ export default function PlayArea({ playProps }) {
         playLaser();
 
         if (!e.target.closest(".ship")) {
-          setScore(0);
+          if (score >= 5) {
+            setScore((prev) => prev - 5);
+          }
         }
       }}
       className="play-area-container w-full"

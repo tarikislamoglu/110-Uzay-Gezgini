@@ -106,6 +106,7 @@ export default function App() {
           playLaser,
           playExplosion,
           difficulty,
+          score,
         }}
       />
       {timerRunning && (
@@ -114,17 +115,17 @@ export default function App() {
         </p>
       )}
       {!timerRunning && startClickCount > 0 && (
-        <div className="text-blue-900 p-2 bg-blue-300 mx-auto text-center font-bold w-1/2 my-4 rounded-md">
-          <p>Oyun Bitti</p>
-          <p>{`${userName}  adlı oyuncunun skoru : ${score}`}</p>
-          <p>best score:{bestScore}</p>
+        <div className="text-blue-800 p-4 bg-blue-300 mx-auto text-center font-bold w-full my-2 rounded-md">
+          <p>Game Over</p>
+          <p>{`${userName}'s Score: ${score}`}</p>
+          <p>Best Score:{bestScore}</p>
         </div>
       )}
 
-      <div className="bg-blue-200 p-4 my-2 rounded-md flex flex-col  space-y-2  w-full mx-auto items-center ">
+      <div className=" text-blue-800 bg-blue-200 p-4 my-2 rounded-md flex flex-col  space-y-2  w-full mx-auto items-center ">
         <label>UserName:</label>
         <input
-          className="w-full"
+          className="text-center"
           type="text"
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
@@ -134,7 +135,7 @@ export default function App() {
         </button>
       </div>
       {optIsOpen && (
-        <div className="bg-blue-200 py-10 my-2 rounded-md flex flex-col items-center space-y-5 w-full  mx-auto">
+        <div className="bg-blue-200 text-blue-800 py-10 my-2 rounded-md flex flex-col items-center space-y-5 w-full  mx-auto">
           <h2>Options</h2>
           <div className="flex flex-col space-y-5">
             <div className="flex justify-between items-center">
@@ -221,7 +222,6 @@ export default function App() {
           setStartClickCount((prev) => prev + 1);
           setStartCount(3);
           setTimeLeft(gameTime);
-
           setScore(STARTING_SCORE);
           setTimerRunning(true);
           setGameStarted(false);
