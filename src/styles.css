@@ -86,8 +86,10 @@ body {
   background: none;
   border: none;
   font-size: 50px;
-  width: 100%;
   transition: opacity 1s;
+  width: fit-content;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .ship:hover {
