@@ -16,8 +16,11 @@ export default function App() {
   const [timeLeft, setTimeLeft] = useState(gameTime);
   const [score, setScore] = useState(STARTING_SCORE);
   const [bestScore, setBestScore] = useState(() => {
-    const stored = localStorage.getItem("bestScore");
-    return stored ? Number(stored) : 0;
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("bestScore");
+      return stored ? Number(stored) : 0;
+    }
+    return 0;
   });
 
   const [musicSound, setMusicSound] = useState(50);
@@ -87,7 +90,9 @@ export default function App() {
   }, [gameStarted]);
 
   useEffect(() => {
-    localStorage.setItem("bestScore", bestScore);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("bestScore", bestScore);
+    }
   }, [bestScore]);
   return (
     <div>
