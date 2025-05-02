@@ -50,7 +50,7 @@ export default function PlayArea({ playProps }) {
           setScore(0);
         }
       }}
-      className="play-area-container"
+      className="play-area-container w-full"
     >
       {shipElements}
     </div>

@@ -95,7 +95,7 @@ export default function App() {
     }
   }, [bestScore]);
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <ScoreBoard data={{ score, timeLeft }} />
       <PlayArea
         playProps={{
@@ -121,9 +121,10 @@ export default function App() {
         </div>
       )}
 
-      <div className="bg-blue-200 p-4 my-4 rounded-md flex  items-baseline justify-center space-x-5 w-1/2 mx-auto">
+      <div className="bg-blue-200 p-4 my-2 rounded-md flex flex-col  space-y-2  w-full mx-auto items-center ">
         <label>UserName:</label>
         <input
+          className="w-full"
           type="text"
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
@@ -133,7 +134,7 @@ export default function App() {
         </button>
       </div>
       {optIsOpen && (
-        <div className="bg-blue-200 py-10 my-4 rounded-md flex flex-col items-center space-y-5 w-1/2 mx-auto">
+        <div className="bg-blue-200 py-10 my-2 rounded-md flex flex-col items-center space-y-5 w-full  mx-auto">
           <h2>Options</h2>
           <div className="flex flex-col space-y-5">
             <div className="flex justify-between items-center">
